@@ -1,0 +1,7 @@
+{
+  "name": "id-card",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
