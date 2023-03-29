@@ -1,17 +1,79 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Create profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Create profile</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+    <ion-item>
+      <ion-label position="stacked">First name*: </ion-label>
+      <ion-input formControlName="firstname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Last name*: </ion-label>
+      <ion-input formControlName="lastname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Date of Birthday*: </ion-label>
+      <ion-datetime
+        #datetime
+        class="mt-2"
+        [max]="today"
+        presentation="date"
+        formControlName="dob"
+        (ionChange)="getDate($event)"
+      ></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">State: </ion-label>
+      <ion-input formControlName="state"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">City: </ion-label>
+      <ion-input formControlName="city"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Street: </ion-label>
+      <ion-input formControlName="street"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Job Title: </ion-label>
+      <ion-input formControlName="job"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Phone number: </ion-label>
+      <ion-input formControlName="phone" type="phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="text-xs">Picture: </ion-label>
+
+      <ion-button (click)="inputFile.click()" expand="block">
+        <ion-icon lazy="true" slot="start" name="image"></ion-icon>
+        <ion-label slot="end">Upload Image</ion-label>
+        <input
+          type="file" #inputFile class="hidden"
+          (change)="loadImageFromDevice($event)" accept="image/png, image/jpeg"
+        >
+      </ion-button>
+    </ion-item>
+
+    <ion-button class="mt-2" type="submit" color="success" expand="block">Submit</ion-button>
+  </form>
 </ion-content>

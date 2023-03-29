@@ -1,0 +1,29 @@
+.hidden {
+	display: none;
+}
+
+.mt-2 {
+	margin-top: 0.5rem; /* 8px */
+}
+
+.text-xs,
+.item .text-xs {
+	font-size: 0.75rem; /* 12px */
+	line-height: 1rem; /* 16px */
+}	
+
+.max-h-40 { 
+	max-height: 10rem; /* 160px */
+}
+
+.w-full {
+	width: 100%;
+}
+
+.object-cover	{
+	object-fit: cover;
+}
+
+.object-center {
+	object-position: center;
+}
