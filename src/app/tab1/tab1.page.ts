@@ -1,22 +1,27 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IonDatetime, ToastController } from '@ionic/angular';
 import { DataService } from '@shared/services/data.service';
+import { LocationService } from '../shared/services/location.service';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   @ViewChild('datetime') datetime!: IonDatetime;
   ionicForm: FormGroup;
   today: string;
+  currentCountry = 'US';
+  states: string[] = [];
+  cities: string[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private toastController: ToastController,
+    private locationService: LocationService,
   ) {
     this.today = new Date().toISOString().substring(0, 10)
     this.ionicForm = this.formBuilder.group({
@@ -30,6 +35,21 @@ export class Tab1Page {
       picture: '',
       phone: ['', [Validators.pattern('^[0-9]+$')]]
     })
+  }
+
+  ngOnInit() {
+    this.states = this.locationService.getStatesByCountry(this.currentCountry);
+
+    console.log("this.ionicForm.get('state')", this.ionicForm.get('state')?.valueChanges)
+    this.ionicForm.get('state')?.valueChanges.subscribe((state) => {
+      this.ionicForm.get('city')?.reset();
+      this.ionicForm.get('city')?.disable();
+      console.log('state', state)
+      if (state) {
+        this.cities = this.locationService.getCitiesByState(this.currentCountry, state);
+        this.ionicForm.get('city')?.enable();
+      }
+    });
   }
 
   getDate(e: any) {
