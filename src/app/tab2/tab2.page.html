@@ -13,24 +13,30 @@
     </ion-toolbar>
   </ion-header>
   <ion-list>
-    <ion-card *ngFor="let item of items">
-      <img
-        *ngIf="item.picture"
-        class="max-h-40 object-cover object-center w-full"
-        [src]="item.picture" alt=""
-      />
-      <ion-card-header>
-        <ion-card-title>{{ item.firstname }} {{ item.lastname }}</ion-card-title>
-        <ion-card-subtitle *ngIf="hasAddress(item)">{{ getAddress(item) }}</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ul>
-          <li *ngIf="item.dob">DoB: {{ item.dob }}</li>
-          <li *ngIf="item.phone">Phone: {{ item.phone }}</li>
-          <li *ngIf="item.job">Job Title: {{ item.job }}</li>
-        </ul>
-      </ion-card-content>
-    </ion-card>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let item of items" size="12" size-sm="6" size-md="4" size-lg="3">
+          <ion-card>
+            <img
+              *ngIf="item.picture"
+              class="max-h-40 object-cover object-center w-full"
+              [src]="item.picture" alt=""
+            />
+            <ion-card-header>
+              <ion-card-title>{{ item.firstname }} {{ item.lastname }}</ion-card-title>
+              <ion-card-subtitle *ngIf="hasAddress(item)">{{ getAddress(item) }}</ion-card-subtitle>
+            </ion-card-header>
+  
+            <ion-card-content>
+              <ul>
+                <li *ngIf="item.dob">DoB: {{ item.dob }}</li>
+                <li *ngIf="item.phone">Phone: {{ item.phone }}</li>
+                <li *ngIf="item.job">Job Title: {{ item.job }}</li>
+              </ul>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-list>
 </ion-content>

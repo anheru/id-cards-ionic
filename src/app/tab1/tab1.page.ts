@@ -67,7 +67,7 @@ export class Tab1Page {
 
   async presentToast(type: 'success' | 'danger') {
     const toast = await this.toastController.create({
-      message: type === 'success' ? 'Profile created' : 'Error',
+      message: type === 'success' ? 'Profile created' : 'No profiles saved',
       duration: 1500,
       icon: type === 'success' ? 'checkmark-circle-outline' : 'alert-circle-outline',
       position: 'top',
